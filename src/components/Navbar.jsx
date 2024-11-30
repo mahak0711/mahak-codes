@@ -1,50 +1,63 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { MenuIcon, XIcon, Download } from 'lucide-react'; // Replace DocumentDownloadIcon with Download if it's not found
+'use client'
+
+import { useState } from 'react'
+import { Link } from 'react-router-dom'
+import { MenuIcon, XIcon, Download, Check } from 'lucide-react'
 
 export default function Navigation() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
+  const [isResumeClicked, setIsResumeClicked] = useState(false)
 
   const handleResumeClick = () => {
+    setIsResumeClicked(true)
     // Add your resume download logic here
-    console.log('Resume button clicked');
-  };
+    console.log('Resume button clicked')
+    
+    // Reset the icon after 2 seconds
+    setTimeout(() => {
+      setIsResumeClicked(false)
+    }, 2000)
+  }
 
   return (
     <nav>
       <div className="fixed top-0 z-40 w-full border-b border-gray-200/20 bg-transparent">
-        <div className="flex items-center justify-between px-4 py-2 lg:px-6">
+        <div className="flex items-center justify-between px-10 py-2 lg:px-6">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/">
-              <a className="text-xl font-bold text-gray-200">Your Logo</a>
+            <Link href="/" className="text-xl font-bold text-gray-200">
+              Your Logo
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <div className="hidden lg:flex space-x-6">
-            <Link href="/">
-              <a className="text-sm text-gray-400 hover:text-white transition-colors">Home</a>
+          <div className="hidden lg:flex items-center space-x-28 flex-1 justify-center">
+            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Home
             </Link>
-            <Link href="/about">
-              <a className="text-sm text-gray-400 hover:text-white transition-colors">Projects</a>
+            <Link href="/projects" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Projects
             </Link>
-            <Link href="/">
-              <a className="text-sm text-gray-400 hover:text-white transition-colors">About</a>
+            <Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
+              About
             </Link>
-            <Link href="/">
-              <a className="text-sm text-gray-400 hover:text-white transition-colors">Contact</a>
+            <Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
+              Contact
             </Link>
-
-            {/* Resume Button */}
-            <button
-              onClick={handleResumeClick}
-              className="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors flex items-center"
-            >
-              <Download className="h-4 w-4 mr-2" /> {/* Use an alternative icon */}
-              Resume
-            </button>
           </div>
+
+          {/* Resume Button */}
+          <button
+            onClick={handleResumeClick}
+            className="hidden lg:flex px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
+          >
+            {isResumeClicked ? (
+              <Check className="h-4 w-4 mr-2" />
+            ) : (
+              <Download className="h-4 w-4 mr-2" />
+            )}
+            Resume
+          </button>
 
           {/* Mobile Menu Button */}
           <button
@@ -63,25 +76,36 @@ export default function Navigation() {
         <div
           className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}
         >
-          <div className="px-4 py-2">
-            <Link href="/">
-              <a className="text-sm font-medium text-gray-200 hover:text-white transition-colors block py-2">Home</a>
+          <div className="px-4 py-2 space-y-4">
+            <Link href="/" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+              Home
             </Link>
-            <Link href="/about">
-              <a className="text-sm font-medium text-gray-200 hover:text-white transition-colors block py-2">About</a>
+            <Link href="/projects" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+              Projects
+            </Link>
+            <Link href="/about" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+              About
+            </Link>
+            <Link href="/contact" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+              Contact
             </Link>
             
             {/* Mobile Resume Button */}
             <button
               onClick={handleResumeClick}
-              className="px-4 py-2 text-sm text-white bg-blue-600 rounded hover:bg-blue-700 transition-colors flex items-center mt-2"
+              className="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors flex items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
             >
-              <Download className="h-4 w-4 mr-2" /> {/* Use an alternative icon */}
+              {isResumeClicked ? (
+                <Check className="h-4 w-4 mr-2" />
+              ) : (
+                <Download className="h-4 w-4 mr-2" />
+              )}
               Resume
             </button>
           </div>
         </div>
       </div>
     </nav>
-  );
+  )
 }
+
