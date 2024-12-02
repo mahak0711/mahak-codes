@@ -1,21 +1,22 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Landing } from './components/Landing'
-import Navbar from './components/Navbar'
-import { BrowserRouter } from 'react-router-dom'
-
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import './App.css';
+import Navbar from './components/Navbar';
+import { Landing } from './components/Landing';
+import AboutPage from './components/About';
+import ProjectsPage from './components/Projects';
+import ContactPage from './components/Contacts';
 function App() {
-
   return (
-    <>
-    <BrowserRouter>
-    <Navbar/>
-  <Landing/>
-  </BrowserRouter>
-    </>
-  )
+    <Router>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+        <Route path="/contact" element={<ContactPage />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;

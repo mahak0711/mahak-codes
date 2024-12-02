@@ -3,8 +3,9 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MenuIcon, XIcon, Download, Check } from 'lucide-react'
+import AboutPage from './About'
 
-export default function Navigation() {
+export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isResumeClicked, setIsResumeClicked] = useState(false)
 
@@ -32,16 +33,16 @@ export default function Navigation() {
 
           {/* Desktop Navigation */}
           <div className="hidden lg:flex items-center space-x-28 flex-1 justify-center">
-            <Link href="/" className="text-sm text-gray-400 hover:text-white transition-colors">
+            <Link to="/" className="text-sm text-gray-400 hover:text-white transition-colors">
               Home
             </Link>
-            <Link href="/projects" className="text-sm text-gray-400 hover:text-white transition-colors">
+            <Link to="/projects" className="text-sm text-gray-400 hover:text-white transition-colors">
               Projects
             </Link>
-            <Link href="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
+            <Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
               About
             </Link>
-            <Link href="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
+            <Link to="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
               Contact
             </Link>
           </div>
