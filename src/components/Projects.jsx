@@ -1,11 +1,17 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { ExternalLink, Github } from 'lucide-react';
-import { motion } from 'framer-motion';
-import { Button } from './ui/Button';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
-
+import React from "react";
+import { ExternalLink, Github } from "lucide-react";
+import { motion } from "framer-motion";
+import { Button } from "./ui/Button";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import projects from "@/projects";
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
@@ -45,32 +51,45 @@ function ProjectsPage() {
           variants={staggerChildren}
           className="grid gap-8 md:grid-cols-2 lg:grid-cols-3"
         >
-          {[1, 2, 3].map((project) => (
-            <motion.div key={project} variants={fadeInUp}>
+          {projects.map((project) => (
+            <motion.div key={project.id} variants={fadeInUp}>
               <Card className="bg-zinc-900 border-zinc-800">
                 <CardHeader>
-                  <CardTitle className="text-white">Project Name</CardTitle>
-                  <CardDescription className="text-zinc-400">Full Stack Application</CardDescription>
+                  <CardTitle className="text-white">{project.title}</CardTitle>
+                  <CardDescription className="text-zinc-400">
+                    {project.description}
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <div className="aspect-video rounded-lg bg-zinc-800 mb-4 overflow-hidden">
+                  <div className="aspect-video object-contain rounded-lg bg-zinc-800 mb-4 overflow-hidden">
                     <img
-                      src="/placeholder.svg"
-                      alt="Project screenshot"
-                      className="object-cover w-full h-full"
+                      src={project.image}
+                      alt={`${project.title} screenshot`}
+                      className="object-conatin w-full h-full"
                     />
                   </div>
-                  <p className="text-zinc-300 mb-4">
-                    A full-stack application built with Next.js, JavaScript, and Tailwind CSS.
-                  </p>
+                  <p className="text-zinc-300 mb-4">{project.tech}</p>
+
                   <div className="flex gap-2">
                     <Button variant="outline" size="sm" className="gap-2">
                       <Github className="w-4 h-4" />
-                      Code
+                      <a
+                        href={project.codeLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Code
+                      </a>
                     </Button>
                     <Button variant="outline" size="sm" className="gap-2">
                       <ExternalLink className="w-4 h-4" />
-                      Demo
+                      <a
+                        href={project.demoLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        Demo
+                      </a>
                     </Button>
                   </div>
                 </CardContent>

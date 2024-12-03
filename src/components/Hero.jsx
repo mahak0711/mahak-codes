@@ -7,7 +7,7 @@ export function Hero() {
     
     <div className="min-h-screen bg-[#1c1c1c] text-white p-10 flex flex-col md:flex-row items-center justify-center gap-8">
      <Meteors number={20} />
-      <div className="bg-white rounded-3xl p-6 text-black max-w-sm mt-4">
+      <div className="bg-white rounded-3xl p-6 text-black max-w-sm mt-17">
         <div className="relative w-full h-64 mb-4">
           <img
             src="image.jpg"
