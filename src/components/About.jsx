@@ -1,6 +1,8 @@
 import React from "react";
 import { Calendar, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import SkillsHead from "./SkillsHead";
+import { Skills } from "./Skills";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -24,7 +26,7 @@ export default function AboutPage() {
       className="min-h-screen bg-[#151312] text-white py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-full mx-auto"> {/* Use full width */}
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="">
           <motion.div variants={staggerChildren}>
             <motion.h1
               variants={fadeInUp}
@@ -34,10 +36,7 @@ export default function AboutPage() {
             </motion.h1>
             <motion.div variants={fadeInUp} className="prose prose-invert">
               <p className="text-lg text-zinc-300">
-                I'm a Full Stack Developer with a passion for creating intuitive
-                and engaging user experiences. With expertise in both front-end
-                and back-end development, I specialize in building scalable web
-                applications using modern technologies.
+              I am a full-stack developer with expertise in building dynamic web applications using technologies like React, Node.js, and various database solutions. I combine strong front-end design skills with back-end development knowledge to create responsive, user-centric digital experiences. Passionate about problem-solving and continuous learning, I strive to deliver efficient and impactful solutions.
               </p>
 
               <motion.h2
@@ -90,6 +89,10 @@ export default function AboutPage() {
           </motion.div>
         </div>
       </div>
+      <SkillsHead/>
+        <Skills  iconSlugs={['javascript', 'react', 'nodejs', 'python', 'java','git','github','adobepremierepro','adobephotoshop','bootstrap','bun','c','cplusplus','javascript','mysql','html5','nodedotjs'
+            ,'mongodb','react','replit','vite','vercel','express','figma','canva','tailwindcss','typescript','firebase','linux','shadcnui',
+        ]} />
     </motion.div>
   );
 }
