@@ -1,8 +1,6 @@
 import React from "react";
 import { Calendar, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import SkillsHead from "./SkillsHead";
-import { Skills } from "./Skills";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -50,26 +48,14 @@ export default function AboutPage() {
                   variants={fadeInUp}
                   className="border-l-2 border-zinc-800 pl-4"
                 >
-                  <h3 className="font-semibold">Senior Full Stack Developer</h3>
-                  <p className="text-zinc-400">Company Name • 2020 - Present</p>
+                  <h3 className="font-semibold">Trainee</h3>
+                  <p className="text-zinc-400">Grras Solutions Pvt. Ltd.  <span className="text-orange-600" >•</span>  July 2023</p>
                   <p className="text-zinc-300 mt-2">
-                    Led development of multiple web applications, mentored
-                    junior developers, and implemented best practices for code
-                    quality and performance.
+                  Completed a frontend development internship, specializing in creating responsive and interactive web applications using HTML, CSS, JavaScript, and React.
                   </p>
                 </motion.div>
 
-                <motion.div
-                  variants={fadeInUp}
-                  className="border-l-2 border-zinc-800 pl-4"
-                >
-                  <h3 className="font-semibold">Full Stack Developer</h3>
-                  <p className="text-zinc-400">Previous Company • 2018 - 2020</p>
-                  <p className="text-zinc-300 mt-2">
-                    Developed and maintained various client projects using
-                    React, Node.js, and AWS.
-                  </p>
-                </motion.div>
+                
               </motion.div>
 
               <motion.h2
@@ -82,17 +68,15 @@ export default function AboutPage() {
                 variants={fadeInUp}
                 className="border-l-2 border-zinc-800 pl-4"
               >
-                <h3 className="font-semibold">Bachelor of Computer Science</h3>
-                <p className="text-zinc-400">University Name • 2014 - 2018</p>
+                <h3 className="font-semibold"> B.Tech in Computer Science</h3>
+                <p className="text-zinc-400">Poornima Institute Of Engineering AND Technology   <span className="text-orange-600" >•</span> 2022 - Expected 2026</p>
               </motion.div>
+              
             </motion.div>
           </motion.div>
         </div>
       </div>
-      <SkillsHead/>
-        <Skills  iconSlugs={['javascript', 'react', 'nodejs', 'python', 'java','git','github','adobepremierepro','adobephotoshop','bootstrap','bun','c','cplusplus','javascript','mysql','html5','nodedotjs'
-            ,'mongodb','react','replit','vite','vercel','express','figma','canva','tailwindcss','typescript','firebase','linux','shadcnui',
-        ]} />
+      
     </motion.div>
   );
 }

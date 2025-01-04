@@ -44,7 +44,7 @@ function ProjectsPage() {
           variants={fadeInUp}
           className="text-lg text-muted-foreground mb-12"
         >
-          A selection of my recent work
+          A collection of my recent work
         </motion.p>
 
         <motion.div
