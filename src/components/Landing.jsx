@@ -1,4 +1,3 @@
-import { GitHubContributionCalendar } from "./github-contribution-calendar";
 import { Hero } from "./Hero";
 import SkillsHead from "./SkillsHead";
 import IconCloud from "./ui/icon-cloud";
@@ -9,6 +8,7 @@ export function Landing(){
         <>
      <Hero/>
      <ScrollDownButton/>
+  
     <SkillsHead />
      <IconCloud iconSlugs={["javascript", "typescript", "react", "nodejs", "html5", "css3", "git",
     "github", "figma", "bootstrap", "tailwindcss", "mongodb", "firebase",

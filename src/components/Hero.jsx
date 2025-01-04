@@ -1,6 +1,9 @@
 import React from 'react';
 import { Github, Instagram, Linkedin, Mail, TwitterIcon } from 'lucide-react';
 import Meteors from './ui/meteors'; // Update the path based on where it’s installed
+import GitHubCalendar from 'react-github-calendar';
+import { Tooltip as ReactTooltip } from 'react-tooltip';
+import 'react-tooltip/dist/react-tooltip.css';
 
 export function Hero() {
   return (
@@ -45,8 +48,28 @@ export function Hero() {
         <p className="text-xl mb-8">
           Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.
         </p>
+        <br/>
+        <div>
+          <GitHubCalendar
+          year="2025"
+            blockRadius="4"
+            username="mahak0711"
+            transformData={(data) =>
+              data.map((day) => ({
+                ...day,
+                tooltip: `${day.count} activities on ${day.date}`,
+              }))
+            }
+            renderBlock={(block, activity) =>
+              React.cloneElement(block, {
+                'data-tooltip-id': 'github-tooltip',
+                'data-tooltip-html': activity.tooltip,
+              })
+            }
+          />
+          <ReactTooltip id="github-tooltip" />
+        </div>
       </div>
     </div>
   );
 }
-

@@ -1,6 +1,7 @@
 import React from "react";
 import { Calendar, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import Leetcode from "./ui/leetcodeCalendar";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -71,7 +72,8 @@ export default function AboutPage() {
                 <h3 className="font-semibold"> B.Tech in Computer Science</h3>
                 <p className="text-zinc-400">Poornima Institute Of Engineering AND Technology   <span className="text-orange-600" >•</span> 2022 - Expected 2026</p>
               </motion.div>
-              
+              <br/>
+              <Leetcode />
             </motion.div>
           </motion.div>
         </div>
