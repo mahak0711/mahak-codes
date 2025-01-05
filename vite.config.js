@@ -10,4 +10,9 @@ export default defineConfig({
       '@': path.resolve(__dirname, 'src'), // Sets '@' to point to the 'src' directory
     },
   },
+  build: {
+    rollupOptions: {
+      external: ['electron'], // Exclude Electron from the bundle
+    },
+  },
 });
