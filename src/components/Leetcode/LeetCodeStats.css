@@ -1,0 +1,75 @@
+/* Container Styling */
+.leetcode-stats {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    color: #333;
+  }
+  
+  .stats p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  h2, h3 {
+    color: #388e3c;
+  }
+  
+  /* Heatmap Grid */
+  .react-calendar-heatmap {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr); /* 7 columns for days of the week */
+    grid-gap: 5px;
+    margin-top: 20px;
+  }
+  
+  .react-calendar-heatmap .day {
+    width: 20px;
+    height: 20px;
+    border-radius: 3px;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+  }
+  
+  .react-calendar-heatmap .day:hover {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+  
+  /* Custom color classes based on submission count */
+  .no-submission {
+    background-color: #f0f0f0;
+  }
+  
+  .low-submission {
+    background-color: #e0f7e0;
+  }
+  
+  .medium-submission {
+    background-color: #a5d6a7;
+  }
+  
+  .high-submission {
+    background-color: #66bb6a;
+  }
+  
+  .very-high-submission {
+    background-color: #388e3c;
+  }
+  
+  /* Loading Spinner */
+  .spinner {
+    font-size: 18px;
+    color: #388e3c;
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  /* Error and No Data Styling */
+  .error, .no-data {
+    font-size: 18px;
+    color: #d32f2f;
+    text-align: center;
+    margin-top: 20px;
+  }
+  

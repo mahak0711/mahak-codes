@@ -40,7 +40,7 @@ export default function AboutPage() {
 
               <motion.h2
                 variants={fadeInUp}
-                className="text-2xl font-semibold mt-8 mb-4"
+                className="text-2xl font-semibold mt-8 mb-4 text-white"
               >
                 Experience
               </motion.h2>
@@ -49,7 +49,7 @@ export default function AboutPage() {
                   variants={fadeInUp}
                   className="border-l-2 border-zinc-800 pl-4"
                 >
-                  <h3 className="font-semibold">Trainee</h3>
+                  <h3 className="font-semibold text-white">Trainee</h3>
                   <p className="text-zinc-400">Grras Solutions Pvt. Ltd.  <span className="text-orange-600" >•</span>  July 2023</p>
                   <p className="text-zinc-300 mt-2">
                   Completed a frontend development internship, specializing in creating responsive and interactive web applications using HTML, CSS, JavaScript, and React.
@@ -61,15 +61,15 @@ export default function AboutPage() {
 
               <motion.h2
                 variants={fadeInUp}
-                className="text-2xl font-semibold mt-8 mb-4"
+                className="text-2xl font-semibold mt-8 mb-4 text-white"
               >
                 Education
               </motion.h2>
               <motion.div
                 variants={fadeInUp}
-                className="border-l-2 border-zinc-800 pl-4"
+                className="border-l-2 border-zinc-800 pl-4 "
               >
-                <h3 className="font-semibold"> B.Tech in Computer Science</h3>
+                <h3 className="font-semibold text-white"> B.Tech in Computer Science</h3>
                 <p className="text-zinc-400">Poornima Institute Of Engineering AND Technology   <span className="text-orange-600" >•</span> 2022 - Expected 2026</p>
               </motion.div>
              
