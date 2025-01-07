@@ -21,7 +21,7 @@ export function Hero() {
         </div>
 
         <div className="p-6">
-          <h2 className="text-4xl font-bold mt-12 mb-4 text-center">MAHAK KANKARIA</h2>
+          <h2 className="text-4xl font-bold mt-12 mb-4 text-center text-black">MAHAK KANKARIA</h2>
 
           <div className="flex justify-between mt-12 text-[#ff6b00]">
             <a href="https://x.com/mahakkk07" className="text-orange-500 hover:text-orange-600">

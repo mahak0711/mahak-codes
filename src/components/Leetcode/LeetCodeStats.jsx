@@ -1,29 +1,46 @@
-import React, { useEffect, useState } from 'react';
-import CalendarHeatmap from 'react-calendar-heatmap';
-import './LeetCodeStats.css'; // Custom CSS for the calendar heatmap
+import React, { useEffect, useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CalendarIcon } from "lucide-react";
+import styles from "./LeetCodeStats.module.css";
 
 const LeetCodeStats = ({ username }) => {
   const [userData, setUserData] = useState(null);
-  const [calendarData, setCalendarData] = useState(null); // State to store the yearly calendar data
+  const [calendarData, setCalendarData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // Fetching the user profile data
-        const userResponse = await fetch(`https://alfa-leetcode-api.onrender.com/userProfile/${username}`);
+        // Fetch user stats
+        const userResponse = await fetch(
+          `https://alfa-leetcode-api.onrender.com/userProfile/${username}`
+        );
+        if (!userResponse.ok) {
+          throw new Error(`User API Error: ${await userResponse.text()}`);
+        }
         const userData = await userResponse.json();
-        setUserData(userData); // Set the user data
+        setUserData(userData);
 
-        // Fetching the yearly submission calendar data
-        const calendarResponse = await fetch(`https://alfa-leetcode-api.onrender.com/userProfileCalendar?username=${username}&year=2024`);
-        const calendarData = await calendarResponse.json();
-        setCalendarData(calendarData); // Set the calendar data
+        // Fetch calendar data
+        const calendarResponse = await fetch(
+          `https://alfa-leetcode-api.onrender.com/userProfileCalendar?username=${username}&year=2024`
+        );
+        if (!calendarResponse.ok) {
+          throw new Error(`Calendar API Error: ${await calendarResponse.text()}`);
+        }
+        const rawCalendarData = await calendarResponse.json();
 
-      } catch (error) {
-        setError(`Error fetching data: ${error.message}`);
-        console.error('Error fetching data:', error);
+        // Transform raw calendar data into heatmap data
+        const processedCalendarData = Object.keys(rawCalendarData).map((timestamp) => ({
+          date: new Date(parseInt(timestamp) * 1000), // Convert UNIX timestamp to JS Date
+          count: rawCalendarData[timestamp],
+        }));
+
+        setCalendarData(processedCalendarData);
+      } catch (err) {
+        setError(`Error fetching data: ${err.message}`);
+        console.error(err);
       } finally {
         setLoading(false);
       }
@@ -32,66 +49,95 @@ const LeetCodeStats = ({ username }) => {
     fetchData();
   }, [username]);
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className={styles.loading}>Loading...</div>;
+  if (error) return <div className={styles.error}>{error}</div>;
+  if (!userData || calendarData.length === 0)
+    return <div className={styles.noData}>No data available.</div>;
 
-  if (error) return <div>{error}</div>;
-
-  if (!userData || !calendarData) return <div>No data available.</div>;
-
-  // Map the calendar data into the format expected by react-calendar-heatmap
-  const heatmapData = Object.keys(calendarData).map(date => ({
-    date: new Date(parseInt(date) * 1000), // Convert Unix timestamp to Date object
-    count: calendarData[date], // Submission count for the day
-  }));
+  const maxCount = Math.max(...calendarData.map((d) => d.count), 0);
 
   return (
-    <div>
-      <h2>User Stats</h2>
+    <Card className={styles.leetcodeStats}>
+      <CardHeader>
+        <CardTitle className="text-2xl font-bold">
+          LeetCode Stats for {username}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        {/* User Stats */}
+        <div className={styles.statsGrid}>
+          <StatItem title="Total Solved" value={userData.totalSolved} />
+          <StatItem title="Ranking" value={userData.ranking} />
+          <StatItem title="Easy Solved" value={userData.easySolved} />
+        </div>
 
-      <h3>Total Solved</h3>
-      <p>{userData.totalSolved}</p>
-
-      <h3>Total Submissions</h3>
-      <p>{userData.totalSubmissions.length}</p>
-
-      <h3>Total Questions</h3>
-      <p>{userData.totalQuestions}</p>
-
-      <h3>Easy Solved</h3>
-      <p>{userData.easySolved}</p>
-
-      <h3>Total Easy Questions</h3>
-      <p>{userData.totalEasy}</p>
-
-      <h3>Ranking</h3>
-      <p>{userData.ranking}</p>
-
-      <h3>Yearly Submission Calendar (2024)</h3>
-      {/* Display the heatmap */}
-      <CalendarHeatmap
-        startDate={new Date('2024-01-01')} // Start of the year
-        endDate={new Date('2024-12-31')}   // End of the year
-        values={heatmapData} // The data for the heatmap
-        showWeekdayLabels={true} // Optionally show weekday labels
-        horizontal={false} // Make it vertical or horizontal
-        classForValue={(value) => {
-          const count = value ? value.count : 0;
-          if (count === 0) return 'no-submission';
-          if (count <= 1) return 'low-submission';
-          if (count <= 3) return 'medium-submission';
-          if (count <= 5) return 'high-submission';
-          return 'very-high-submission';
-        }}
-        tooltipDataAttrs={(value) => {
-          const date = value ? value.date : null; // Ensure date exists
-          const dateString = date ? date.toLocaleDateString() : "No date"; // Check if date exists before calling toLocaleDateString
-          return {
-            'data-tip': `${dateString} - Submissions: ${value ? value.count : 0}`,
-          };
-        }}
-      />
-    </div>
+        {/* Heatmap */}
+        <div className={styles.heatmapContainer}>
+          <h3 className="text-lg font-semibold mb-4 flex items-center">
+            <CalendarIcon className="mr-2" />
+            Yearly Submission Calendar (2024)
+          </h3>
+          <div className={styles.heatmap}>
+            {generateHeatmap(calendarData, maxCount)}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
   );
+};
+
+const StatItem = ({ title, value }) => (
+  <div className={styles.statItem}>
+    <h3 className="text-sm font-medium text-muted-foreground">{title}</h3>
+    <p className="text-2xl font-bold">{value}</p>
+  </div>
+);
+
+const generateHeatmap = (data, maxCount) => {
+  const startDate = new Date("2024-01-01");
+  const endDate = new Date("2024-12-31");
+  const dayMap = new Map();
+
+  // Map the data by date
+  data.forEach((day) => {
+    const dateStr = day.date.toISOString().split("T")[0];
+    dayMap.set(dateStr, day.count);
+  });
+
+  const weeks = [];
+  let currentDate = new Date(startDate);
+
+  while (currentDate <= endDate) {
+    const week = [];
+    for (let i = 0; i < 7; i++) {
+      const dateStr = currentDate.toISOString().split("T")[0];
+      const count = dayMap.get(dateStr) || 0;
+
+      week.push(
+        <div
+          key={dateStr}
+          className={styles.day}
+          style={{ backgroundColor: getColor(count, maxCount) }}
+          title={`${dateStr} - Submissions: ${count}`}
+        />
+      );
+
+      currentDate.setDate(currentDate.getDate() + 1);
+    }
+    weeks.push(
+      <div key={currentDate} className={styles.week}>
+        {week}
+      </div>
+    );
+  }
+
+  return weeks;
+};
+
+const getColor = (count, maxCount) => {
+  if (count === 0) return "#ebedf0"; // Light gray for no submissions
+  const intensity = count / maxCount; // Normalize intensity
+  return `hsl(${120 * intensity}, 100%, ${50 + 25 * (1 - intensity)}%)`; // Green gradient
 };
 
 export default LeetCodeStats;
