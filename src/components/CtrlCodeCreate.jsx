@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import LeetCodeStats from "./Leetcode/LeetCodeStats";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -35,7 +34,6 @@ export default function CodePage() {
             </motion.h1>
             <motion.div variants={fadeInUp} className="prose prose-invert flex justify-center py-8">
               {/* Pass username and sessionCookie as props */}
-              <LeetCodeStats username={username} year={year} />
             </motion.div>
           </motion.div>
         </div>
