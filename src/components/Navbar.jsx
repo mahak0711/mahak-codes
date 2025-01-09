@@ -3,7 +3,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { MenuIcon, XIcon, Download, Check } from 'lucide-react'
-import AboutPage from './About'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
@@ -11,9 +10,8 @@ export default function Navbar() {
 
   const handleResumeClick = () => {
     setIsResumeClicked(true)
-    // Add your resume download logic here
     console.log('Resume button clicked')
-    
+
     // Reset the icon after 2 seconds
     setTimeout(() => {
       setIsResumeClicked(false)
@@ -22,12 +20,16 @@ export default function Navbar() {
 
   return (
     <nav>
-      <div className="fixed top-0 z-40 w-full border-b border-gray-200/20 bg-transparent">
-        <div className="flex items-center justify-between px-10 py-2 lg:px-6">
+      <div className="fixed top-0 z-40 w-full border-b border-gray-200/20 bg-gray-800/50 backdrop-blur-md">
+        <div className="flex items-center justify-between px-10 py-3 lg:px-6">
           {/* Logo */}
           <div className="flex items-center">
-            <Link href="/" className="text-xl font-bold text-gray-200">
-              Your Logo
+            <Link to="/" className="flex items-center">
+              <img
+                src="/logo.png"
+                alt="Logo"
+                className="h-8 w-8 object-contain"
+              />
             </Link>
           </div>
 
@@ -48,7 +50,9 @@ export default function Navbar() {
           </div>
 
           {/* Resume Button */}
-          <button
+          <a
+            href="/Resume.pdf" // Path to the PDF file
+            download="Resume.pdf" // File name for download
             onClick={handleResumeClick}
             className="hidden lg:flex px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
           >
@@ -58,7 +62,7 @@ export default function Navbar() {
               <Download className="h-4 w-4 mr-2" />
             )}
             Resume
-          </button>
+          </a>
 
           {/* Mobile Menu Button */}
           <button
@@ -78,21 +82,23 @@ export default function Navbar() {
           className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}
         >
           <div className="px-4 py-2 space-y-4">
-            <Link href="/" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link to="/" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
               Home
             </Link>
-            <Link href="/projects" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link to="/projects" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
               Projects
             </Link>
-            <Link href="/about" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link to="/about" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
               About
             </Link>
-            <Link href="/contact" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link to="/contact" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
               Contact
             </Link>
-            
+
             {/* Mobile Resume Button */}
-            <button
+            <a
+              href="/Resume.pdf" // Path to the PDF file
+              download="Resume.pdf" // File name for download
               onClick={handleResumeClick}
               className="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors flex items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
             >
@@ -102,11 +108,10 @@ export default function Navbar() {
                 <Download className="h-4 w-4 mr-2" />
               )}
               Resume
-            </button>
+            </a>
           </div>
         </div>
       </div>
     </nav>
   )
 }
-
