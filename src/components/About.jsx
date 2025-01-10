@@ -1,7 +1,6 @@
 import React from "react";
 import { Calendar, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
-import CodePage from "./CtrlCodeCreate";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -78,7 +77,6 @@ export default function AboutPage() {
         </div>
       </div>
 
-      <CodePage/>
       
     </motion.div>
     
