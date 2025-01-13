@@ -7,7 +7,7 @@ import 'react-tooltip/dist/react-tooltip.css';
 
 export function Hero() {
   return (
-    <div className="min-h-screen bg-[#1c1c1c] text-white p-10 flex flex-col md:flex-row items-center justify-center gap-8">
+    <div className="min-h-screen bg-[#1c1c1c] text-white p-10 flex flex-col md:flex-row items-center justify-center gap-8 relative overflow-hidden">
       <Meteors number={20} />
       <div className="bg-white rounded-3xl p-6 text-black max-w-sm mt-17">
         <div className="relative w-full h-64 mb-4">
@@ -48,14 +48,17 @@ export function Hero() {
         <p className="text-xl mb-8">
           Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.
         </p>
-        <br/>
+        <br />
         <div>
           <GitHubCalendar
-          year="2025"
+            year="2025"
             blockRadius="4"
             username="mahak0711"
             transformData={(data) =>
-              data.map((day) => ({
+              data.filter((day) => {
+                const date = new Date(day.date);
+                return date.getMonth() >= 0 && date.getMonth() <= 8; 
+              }).map((day) => ({
                 ...day,
                 tooltip: `${day.count} activities on ${day.date}`,
               }))

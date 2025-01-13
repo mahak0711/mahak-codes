@@ -1,3 +1,5 @@
+import ContactPage from "./Contacts";
+import Footer from "./Footer";
 import { Hero } from "./Hero";
 import SkillsHead from "./SkillsHead";
 import IconCloud from "./ui/icon-cloud";
@@ -8,13 +10,8 @@ export function Landing(){
         <>
      <Hero/>
      <ScrollDownButton/>
-  
-    <SkillsHead />
-     <IconCloud iconSlugs={["javascript", "typescript", "react", "nodejs", "html5", "css3", "git",
-    "github", "figma", "bootstrap", "tailwindcss", "mongodb", "firebase",
-    "express", "vite", "vercel", "linux", "java", "python","nextdotjs","postgresql","prisma"]}/> 
-        
-        {/* <GitHubContributionCalendar username="mahak0711" /> */}
+     <ContactPage/>
+        <Footer/>
         </>
         //drawer
         //hover card

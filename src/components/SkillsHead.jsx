@@ -35,7 +35,7 @@ const TypingAnimation = ({ text, duration = 200, className }) => {
 };
 
 const SkillsHead = () => {
-  const text = "My Skills";
+  const text = "Skills";
 
   return (
     <>

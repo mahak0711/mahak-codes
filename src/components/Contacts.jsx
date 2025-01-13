@@ -70,7 +70,7 @@ export default function ContactPage() {
     <motion.div
       initial="initial"
       animate="animate"
-      className="min-h-screen bg-black text-white py-16 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-3xl mx-auto">
         <motion.div variants={fadeInUp}>

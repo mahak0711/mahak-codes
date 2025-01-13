@@ -38,6 +38,7 @@
     "react-router-dom": "^7.0.1",
     "react-tooltip": "^5.28.0",
     "rimraf": "^6.0.1",
+    "simplebar": "^6.3.0",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {

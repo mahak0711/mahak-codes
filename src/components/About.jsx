@@ -1,6 +1,9 @@
 import React from "react";
 import { Calendar, Mail, MapPin } from "lucide-react";
 import { motion } from "framer-motion";
+import SkillsHead from "./SkillsHead";
+import IconCloud from "./ui/icon-cloud";
+import { ScrollDownButton } from "./ui/ScrollDownButton";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 20 },
@@ -18,10 +21,11 @@ const staggerChildren = {
 
 export default function AboutPage() {
   return (
+    <>
     <motion.div
       initial="initial"
       animate="animate"
-      className="min-h-screen bg-[#151312] text-white py-16 px-4 sm:px-6 lg:px-8"
+      className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8"
     >
       <div className="max-w-full mx-auto"> {/* Use full width */}
         <div className="">
@@ -79,6 +83,12 @@ export default function AboutPage() {
 
       
     </motion.div>
-    
+    <ScrollDownButton/>
+    <SkillsHead />
+    <IconCloud iconSlugs={["javascript", "typescript", "react", "nodejs", "html5", "css3", "git",
+   "github", "figma", "bootstrap", "tailwindcss", "mongodb", "firebase",
+   "express", "vite", "vercel", "linux", "java", "python","nextdotjs","postgresql","prisma"]}/> 
+       </>
+
   );
 }

@@ -44,9 +44,7 @@ export default function Navbar() {
             <Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
               About
             </Link>
-            <Link to="/contact" className="text-sm text-gray-400 hover:text-white transition-colors">
-              Contact
-            </Link>
+            
           </div>
 
           {/* Resume Button */}
@@ -91,11 +89,8 @@ export default function Navbar() {
             <Link to="/about" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
               About
             </Link>
-            <Link to="/contact" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
-              Contact
-            </Link>
+            
 
-            {/* Mobile Resume Button */}
             <a
               href="/Resume.pdf" // Path to the PDF file
               download="Resume.pdf" // File name for download
