@@ -46,8 +46,8 @@ export function Hero() {
           <span className="text-[#3a3a3a]">DEVELOPER</span>
         </h1>
         <p className="text-xl mb-8">
-          Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.
-        </p>
+        I’m a developer and photographer.<br/>  
+        I occasionally enjoy designing.        </p>
         <br />
         <div>
           <GitHubCalendar
