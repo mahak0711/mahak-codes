@@ -18,7 +18,16 @@ const projects = [
       demoLink: "https://check-point-six.vercel.app/",
     },
     {
-      id: 3,
+      id:3,
+      title:"NextPrompt",
+      description:"Next.js CRUD App",
+      image:"/project-images/NextPrompt.png",
+      tech:"A Next.js application styled with Tailwind CSS, featuring Google OAuth authentication. Enables users to create, update, and delete prompts for community sharing",
+      codeLink:"https://github.com/mahak0711/NextPrompt",
+      demoLink:"https://next-prompt-nu.vercel.app/",
+    },
+    {
+      id: 4,
       title: "EscapeMaze",
       description: "Frontend Game",
       image: "/project-images/Escape.png",
@@ -26,5 +35,6 @@ const projects = [
       codeLink: "https://github.com/mahak0711/piece-ai-hands-on",
       demoLink: "https://mahak0711.github.io/piece-ai-hands-on/",
     },
+   
   ];
   export default projects;
