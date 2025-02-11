@@ -9,8 +9,8 @@ export function Hero() {
   return (
     <div className="min-h-screen bg-[#1c1c1c] text-white px-6 py-12 flex flex-col md:flex-row items-center justify-center gap-12 relative overflow-hidden">
       <Meteors number={20} />
-      <div className="bg-white rounded-3xl p-6 text-black max-w-xs md:max-w-sm w-full shadow-lg">
-        <div className="relative w-full h-48 md:h-64 mb-4">
+      <div className="bg-white h-70 rounded-3xl p-8 text-black max-w-xs md:max-w-sm w-full shadow-lg mt-10">
+        <div className="relative w-full h-50 md:h-60 mb-4">
           <img
             src="image.jpg"
             alt="Mahak Kankaria"
@@ -48,7 +48,7 @@ export function Hero() {
           I occasionally enjoy designing.
         </p>
 
-        <div className="p-2">
+        <div className="overflow-auto scrollbar">
           <GitHubCalendar
             year="2025"
             blockRadius="4"
