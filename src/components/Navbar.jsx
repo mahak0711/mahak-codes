@@ -1,12 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
 import { MenuIcon, XIcon, Download, Check } from 'lucide-react'
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [isResumeClicked, setIsResumeClicked] = useState(false)
+  const menuRef = useRef(null)
 
   const handleResumeClick = () => {
     setIsResumeClicked(true)
@@ -17,6 +18,23 @@ export default function Navbar() {
       setIsResumeClicked(false)
     }, 2000)
   }
+
+  // Close the mobile menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setMobileMenuOpen(false)
+      }
+    }
+
+    if (mobileMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [mobileMenuOpen])
 
   return (
     <nav>
@@ -44,13 +62,12 @@ export default function Navbar() {
             <Link to="/about" className="text-sm text-gray-400 hover:text-white transition-colors">
               About
             </Link>
-            
           </div>
 
           {/* Resume Button */}
           <a
-            href="/Resume.pdf" // Path to the PDF file
-            download="Resume.pdf" // File name for download
+            href="/Resume.pdf"
+            download="Resume.pdf"
             onClick={handleResumeClick}
             className="hidden lg:flex px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
           >
@@ -76,25 +93,37 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Navigation */}
-        <div
-          className={`lg:hidden ${mobileMenuOpen ? 'block' : 'hidden'}`}
-        >
-          <div className="px-4 py-2 space-y-4">
-            <Link to="/" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+        {mobileMenuOpen && (
+          <div ref={menuRef} className="lg:hidden absolute top-full left-0 w-full bg-gray-900 p-4">
+            <Link
+              to="/"
+              className="text-sm font-medium text-gray-200 hover:text-white transition-colors block"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Home
             </Link>
-            <Link to="/projects" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link
+              to="/projects"
+              className="text-sm font-medium text-gray-200 hover:text-white transition-colors block"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               Projects
             </Link>
-            <Link to="/about" className="text-sm font-medium text-gray-200 hover:text-white transition-colors block">
+            <Link
+              to="/about"
+              className="text-sm font-medium text-gray-200 hover:text-white transition-colors block"
+              onClick={() => setMobileMenuOpen(false)}
+            >
               About
             </Link>
-            
 
             <a
-              href="/Resume.pdf" // Path to the PDF file
-              download="Resume.pdf" // File name for download
-              onClick={handleResumeClick}
+              href="/Resume.pdf"
+              download="Resume.pdf"
+              onClick={() => {
+                handleResumeClick()
+                setMobileMenuOpen(false)
+              }}
               className="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors flex items-center hover:animate-pulse active:scale-95 transform transition-transform duration-100"
             >
               {isResumeClicked ? (
@@ -105,7 +134,7 @@ export default function Navbar() {
               Resume
             </a>
           </div>
-        </div>
+        )}
       </div>
     </nav>
   )
