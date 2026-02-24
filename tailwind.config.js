@@ -6,7 +6,11 @@ module.exports = {
   	extend: {
   		animation: {
   			spotlight: 'spotlight 2s ease .75s 1 forwards',
-  			meteor: 'meteor 5s linear infinite'
+  			meteor: 'meteor 5s linear infinite',
+  			aurora: 'aurora 12s ease-in-out infinite',
+  			'border-rotate': 'border-rotate 4s linear infinite',
+  			'glow-pulse': 'glow-pulse 2.5s ease-in-out infinite',
+  			shimmer: 'shimmer 2.5s linear infinite',
   		},
   		keyframes: {
   			spotlight: {
@@ -31,6 +35,30 @@ module.exports = {
   					transform: 'rotate(215deg) translateX(-500px)',
   					opacity: '0'
   				}
+  			},
+  			aurora: {
+  				'0%, 100%': {
+  					backgroundPosition: '0% 50%'
+  				},
+  				'50%': {
+  					backgroundPosition: '100% 50%'
+  				}
+  			},
+  			'border-rotate': {
+  				'0%': { '--border-angle': '0deg' },
+  				'100%': { '--border-angle': '360deg' }
+  			},
+  			'glow-pulse': {
+  				'0%, 100%': {
+  					textShadow: '0 0 10px rgba(255,107,0,0.5), 0 0 20px rgba(255,107,0,0.3), 0 0 40px rgba(255,107,0,0.1)'
+  				},
+  				'50%': {
+  					textShadow: '0 0 20px rgba(255,107,0,0.8), 0 0 40px rgba(255,107,0,0.5), 0 0 60px rgba(255,107,0,0.3)'
+  				}
+  			},
+  			shimmer: {
+  				'0%': { backgroundPosition: '-200% 0' },
+  				'100%': { backgroundPosition: '200% 0' }
   			}
   		}
   	}

@@ -1,26 +1,16 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import { Send } from 'lucide-react';
 import { Button } from './ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import emailjs from 'emailjs-com';
 import { useState } from 'react';
-
-const fadeInUp = {
-  initial: { opacity: 0, y: 20 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.5 },
-};
-
-const staggerChildren = {
-  animate: {
-    transition: {
-      staggerChildren: 0.1,
-    },
-  },
-};
+import SpotlightCard from './ui/SpotlightCard';
+import AnimatedBackground from './ui/AnimatedBackground';
+import TextShimmer from './ui/TextShimmer';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -44,7 +34,6 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Replace with your EmailJS service ID, template ID, and user ID
     const serviceID = 'service_zunkyr8';
     const templateID = 'template_7atjr0m';
     const userID = 'YyDMEh-4JOjtPtXaw';
@@ -68,75 +57,140 @@ export default function ContactPage() {
 
   return (
     <motion.div
-      initial="initial"
-      animate="animate"
-      className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+      className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
-      <div className="max-w-3xl mx-auto">
-        <motion.div variants={fadeInUp}>
-          <Card className="bg-zinc-900 border-zinc-800">
-            <CardHeader>
-              <CardTitle className="text-2xl text-white">Get in Touch</CardTitle>
-              <CardDescription className="text-zinc-400">
-                Fill out the form below and I'll get back to you as soon as possible.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <motion.form variants={staggerChildren} className="space-y-6" onSubmit={handleSubmit}>
-                <motion.div variants={fadeInUp} className="grid gap-4 sm:grid-cols-2">
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-zinc-300">Name</label>
+      <AnimatedBackground />
+
+      <div className="max-w-3xl mx-auto relative">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-8"
+        >
+          <h1 className="text-4xl md:text-5xl font-bold">
+            <TextShimmer className="text-4xl md:text-5xl font-bold">Get in Touch</TextShimmer>
+          </h1>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 40, scale: 0.95, filter: 'blur(8px)' }}
+          whileInView={{ opacity: 1, y: 0, scale: 1, filter: 'blur(0px)' }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          <SpotlightCard>
+            <Card className="bg-zinc-900/60 backdrop-blur-md border-zinc-800/50 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+              <CardHeader>
+                <CardTitle className="text-2xl text-white">Send a Message</CardTitle>
+                <CardDescription className="text-zinc-400">
+                  Fill out the form below and I'll get back to you as soon as possible.
+                </CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-6" onSubmit={handleSubmit}>
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.2 }}
+                    className="grid gap-4 sm:grid-cols-2"
+                  >
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-zinc-300">Name</label>
+                      <Input
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
+                      />
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-sm font-medium text-zinc-300">Email</label>
+                      <Input
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="Your email"
+                        className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
+                      />
+                    </div>
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.3 }}
+                    className="space-y-2"
+                  >
+                    <label className="text-sm font-medium text-zinc-300">Subject</label>
                     <Input
-                      name="name"
-                      value={formData.name}
+                      name="subject"
+                      value={formData.subject}
                       onChange={handleChange}
-                      placeholder="Your name"
-                      className="bg-zinc-800 border-zinc-700 text-white"
+                      placeholder="Project inquiry"
+                      className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <label className="text-sm font-medium text-zinc-300">Email</label>
-                    <Input
-                      name="email"
-                      type="email"
-                      value={formData.email}
+                  </motion.div>
+
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.4 }}
+                    className="space-y-2"
+                  >
+                    <label className="text-sm font-medium text-zinc-300">Message</label>
+                    <Textarea
+                      name="message"
+                      value={formData.message}
                       onChange={handleChange}
-                      placeholder="Your email"
-                      className="bg-zinc-800 border-zinc-700 text-white"
+                      placeholder="Your message"
+                      className="bg-zinc-800/50 border-zinc-700/50 text-white min-h-[150px] focus:border-orange-500/50 transition-colors"
                     />
-                  </div>
-                </motion.div>
+                  </motion.div>
 
-                <motion.div variants={fadeInUp} className="space-y-2">
-                  <label className="text-sm font-medium text-zinc-300">Subject</label>
-                  <Input
-                    name="subject"
-                    value={formData.subject}
-                    onChange={handleChange}
-                    placeholder="Project inquiry"
-                    className="bg-zinc-800 border-zinc-700 text-white"
-                  />
-                </motion.div>
-
-                <motion.div variants={fadeInUp} className="space-y-2">
-                  <label className="text-sm font-medium text-zinc-300">Message</label>
-                  <Textarea
-                    name="message"
-                    value={formData.message}
-                    onChange={handleChange}
-                    placeholder="Your message"
-                    className="bg-zinc-800 border-zinc-700 text-white min-h-[150px]"
-                  />
-                </motion.div>
-
-                <motion.div variants={fadeInUp}>
-                  <Button type="submit" className="w-full bg-orange-600" disabled={isSubmitting}>
-                    {isSubmitting ? 'Sending...' : 'Send Message'}
-                  </Button>
-                </motion.div>
-              </motion.form>
-            </CardContent>
-          </Card>
+                  <motion.div
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.5 }}
+                  >
+                    <motion.button
+                      type="submit"
+                      disabled={isSubmitting}
+                      whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,107,0,0.4)' }}
+                      whileTap={{ scale: 0.98 }}
+                      className="w-full py-3 px-6 rounded-md bg-gradient-to-r from-orange-600 to-orange-500 text-white font-medium flex items-center justify-center gap-2 disabled:opacity-60 transition-all duration-300 hover:from-orange-500 hover:to-orange-600"
+                    >
+                      {isSubmitting ? (
+                        <>
+                          <motion.div
+                            animate={{ rotate: 360 }}
+                            transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+                            className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full"
+                          />
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          Send Message
+                        </>
+                      )}
+                    </motion.button>
+                  </motion.div>
+                </form>
+              </CardContent>
+            </Card>
+          </SpotlightCard>
         </motion.div>
       </div>
     </motion.div>

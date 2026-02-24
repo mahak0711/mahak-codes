@@ -1,54 +1,58 @@
 import React from 'react';
-import { Github, Instagram, Linkedin, Mail, TwitterIcon } from 'lucide-react';
+import { motion } from 'framer-motion';
 import Meteors from './ui/meteors';
 import GitHubCalendar from 'react-github-calendar';
 import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
+import AnimatedBackground from './ui/AnimatedBackground';
+import FloatingShapes from './ui/FloatingShapes';
+import Particles from './ui/Particles';
+import StaggerText from './ui/StaggerText';
+import TextShimmer from './ui/TextShimmer';
+import IDCard from './ui/IDCard';
 
 export function Hero() {
   return (
-    <div className="min-h-screen bg-[#1c1c1c] text-white px-6 py-12 flex flex-col md:flex-row items-center justify-center gap-12 relative overflow-hidden">
-      <Meteors number={20} />
-      <div className="bg-white h-70 rounded-3xl p-8 text-black max-w-xs md:max-w-sm w-full shadow-lg mt-10">
-        <div className="relative w-full h-50 md:h-60 mb-4">
-          <img
-            src="image.jpg"
-            alt="Mahak Kankaria"
-            className="w-full h-full object-cover rounded-2xl"
-          />
-        </div>
+    <div className="min-h-screen bg-[#1c1c1c] text-white px-6 pb-12 flex flex-col md:flex-row items-center justify-center gap-8 md:gap-12 relative overflow-hidden">
+      <AnimatedBackground variant="cosmic" />
+      <Particles count={40} />
+      <FloatingShapes />
+      <Meteors number={15} />
 
-        <div className="p-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">MAHAK KANKARIA</h2>
-
-          <div className="flex justify-center space-x-6 mt-6 text-[#ff6b00]">
-            <a href="https://x.com/mahakkk07" className="hover:text-orange-600">
-              <TwitterIcon size={24} />
-            </a>
-            <a href="https://www.linkedin.com/in/mahak-kankaria-9252a324a/" className="hover:text-orange-600">
-              <Linkedin size={24} />
-            </a>
-            <a href="https://github.com/mahak0711" className="hover:text-orange-600">
-              <Github size={24} />
-            </a>
-            <a href="mailto:kankariamahak7@gmail.com" className="hover:text-orange-600">
-              <Mail size={24} />
-            </a>
-          </div>
-        </div>
+      {/* 3D Animated ID Card - lanyard extends to top of viewport */}
+      <div className="relative z-10">
+        <IDCard />
       </div>
 
-      <div className="max-w-xl w-full text-center md:text-left">
+      {/* Right content - slides in from right */}
+      <motion.div
+        initial={{ opacity: 0, x: 100 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, ease: [0.25, 0.46, 0.45, 0.94], delay: 0.6 }}
+        className="max-w-xl w-full text-center md:text-left relative z-10"
+      >
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          FULL STACK <br />
-          <span className="text-[#3a3a3a]">DEVELOPER</span>
+          <StaggerText text="FULL STACK" delay={1.2} staggerDelay={0.04} />
+          <br />
+          <TextShimmer className="text-4xl md:text-6xl font-bold">DEVELOPER</TextShimmer>
         </h1>
-        <p className="text-lg md:text-xl mb-6">
-          I’m a developer and photographer.<br />  
-          I occasionally enjoy designing.
-        </p>
 
-        <div className="overflow-auto scrollbar">
+        <motion.p
+          initial={{ opacity: 0, y: 20, filter: 'blur(10px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          transition={{ duration: 0.6, delay: 2 }}
+          className="text-lg md:text-xl mb-6 text-zinc-300"
+        >
+          I'm a developer and photographer.<br />
+          I occasionally enjoy designing.
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 0.6, delay: 2.3 }}
+          className="overflow-auto scrollbar"
+        >
           <GitHubCalendar
             year="2025"
             blockRadius="4"
@@ -56,7 +60,7 @@ export function Hero() {
             transformData={(data) =>
               data.filter((day) => {
                 const date = new Date(day.date);
-                return date.getMonth() >= 0 && date.getMonth() <= 8; 
+                return date.getMonth() >= 0 && date.getMonth() <= 8;
               }).map((day) => ({
                 ...day,
                 tooltip: `${day.count} activities on ${day.date}`,
@@ -70,8 +74,8 @@ export function Hero() {
             }
           />
           <ReactTooltip id="github-tooltip" />
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 }
