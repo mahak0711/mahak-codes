@@ -11,6 +11,8 @@ module.exports = {
   			'border-rotate': 'border-rotate 4s linear infinite',
   			'glow-pulse': 'glow-pulse 2.5s ease-in-out infinite',
   			shimmer: 'shimmer 2.5s linear infinite',
+  			'float': 'float 6s ease-in-out infinite',
+  			'pulse-glow': 'pulse-glow 3s ease-in-out infinite',
   		},
   		keyframes: {
   			spotlight: {
@@ -59,8 +61,19 @@ module.exports = {
   			shimmer: {
   				'0%': { backgroundPosition: '-200% 0' },
   				'100%': { backgroundPosition: '200% 0' }
-  			}
-  		}
+  			},
+  			float: {
+  				'0%, 100%': { transform: 'translateY(0px)' },
+  				'50%': { transform: 'translateY(-10px)' }
+  			},
+  			'pulse-glow': {
+  				'0%, 100%': { boxShadow: '0 0 15px rgba(255,107,0,0.15)' },
+  				'50%': { boxShadow: '0 0 30px rgba(255,107,0,0.3), 0 0 60px rgba(255,107,0,0.1)' }
+  			},
+  		},
+  		transitionTimingFunction: {
+  			'crisp': 'cubic-bezier(0.25, 0.1, 0.25, 1)',
+  		},
   	}
   },
   plugins: [],

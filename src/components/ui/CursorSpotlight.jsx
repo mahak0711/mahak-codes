@@ -5,8 +5,8 @@ export default function CursorSpotlight() {
   const mouseX = useMotionValue(-100);
   const mouseY = useMotionValue(-100);
 
-  const springX = useSpring(mouseX, { damping: 25, stiffness: 150 });
-  const springY = useSpring(mouseY, { damping: 25, stiffness: 150 });
+  const springX = useSpring(mouseX, { damping: 20, stiffness: 200 });
+  const springY = useSpring(mouseY, { damping: 20, stiffness: 200 });
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -20,23 +20,35 @@ export default function CursorSpotlight() {
   return (
     <motion.div
       className="pointer-events-none fixed inset-0 z-30"
-      style={{
-        background: 'transparent',
-      }}
     >
+      {/* Main glow */}
       <motion.div
         className="pointer-events-none absolute"
         style={{
           x: springX,
           y: springY,
-          width: 600,
-          height: 600,
-          marginLeft: -300,
-          marginTop: -300,
+          width: 500,
+          height: 500,
+          marginLeft: -250,
+          marginTop: -250,
           borderRadius: '50%',
           background:
-            'radial-gradient(circle, rgba(255,107,0,0.06) 0%, rgba(255,107,0,0.03) 25%, transparent 60%)',
-          filter: 'blur(2px)',
+            'radial-gradient(circle, rgba(255,107,0,0.07) 0%, rgba(255,107,0,0.03) 30%, transparent 55%)',
+        }}
+      />
+      {/* Inner crisp dot */}
+      <motion.div
+        className="pointer-events-none absolute"
+        style={{
+          x: springX,
+          y: springY,
+          width: 120,
+          height: 120,
+          marginLeft: -60,
+          marginTop: -60,
+          borderRadius: '50%',
+          background:
+            'radial-gradient(circle, rgba(255,107,0,0.04) 0%, transparent 70%)',
         }}
       />
     </motion.div>

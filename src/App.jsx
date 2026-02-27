@@ -16,8 +16,12 @@ function ScrollProgressBar() {
 
   return (
     <motion.div
-      className="fixed top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-orange-500 via-orange-400 to-orange-600 z-50 origin-left"
-      style={{ scaleX }}
+      className="fixed top-0 left-0 right-0 h-[2px] z-50 origin-left"
+      style={{
+        scaleX,
+        background: 'linear-gradient(90deg, #ff6b00, #ff8533, #ff4500)',
+        boxShadow: '0 0 8px rgba(255,107,0,0.5), 0 0 20px rgba(255,107,0,0.2)',
+      }}
     />
   );
 }
@@ -40,10 +44,12 @@ function AnimatedRoutes() {
 function App() {
   return (
     <Router>
-      <CursorSpotlight />
-      <ScrollProgressBar />
-      <Navbar />
-      <AnimatedRoutes />
+      <div className="grain">
+        <CursorSpotlight />
+        <ScrollProgressBar />
+        <Navbar />
+        <AnimatedRoutes />
+      </div>
     </Router>
   );
 }

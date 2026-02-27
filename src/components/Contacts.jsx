@@ -8,9 +8,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import emailjs from 'emailjs-com';
 import { useState } from 'react';
-import SpotlightCard from './ui/SpotlightCard';
+import Card3D from './ui/Card3D';
 import AnimatedBackground from './ui/AnimatedBackground';
-import TextShimmer from './ui/TextShimmer';
+import FloatingOrbs from './ui/FloatingOrbs';
+import Text3D from './ui/Text3D';
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -63,6 +64,7 @@ export default function ContactPage() {
       className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
     >
       <AnimatedBackground />
+      <FloatingOrbs />
 
       <div className="max-w-3xl mx-auto relative">
         <motion.div
@@ -73,7 +75,7 @@ export default function ContactPage() {
           className="text-center mb-8"
         >
           <h1 className="text-4xl md:text-5xl font-bold">
-            <TextShimmer className="text-4xl md:text-5xl font-bold">Get in Touch</TextShimmer>
+            <Text3D text="Get in Touch" className="text-4xl md:text-5xl font-bold" />
           </h1>
         </motion.div>
 
@@ -83,8 +85,8 @@ export default function ContactPage() {
           viewport={{ once: true }}
           transition={{ duration: 0.7, delay: 0.1 }}
         >
-          <SpotlightCard>
-            <Card className="bg-zinc-900/60 backdrop-blur-md border-zinc-800/50 shadow-[0_20px_60px_rgba(0,0,0,0.4)]">
+          <Card3D intensity={8}>
+            <Card className="bg-zinc-900/70 backdrop-blur-xl border-zinc-800/30 shadow-[0_20px_60px_rgba(0,0,0,0.5),0_0_0_1px_rgba(255,255,255,0.03)]">
               <CardHeader>
                 <CardTitle className="text-2xl text-white">Send a Message</CardTitle>
                 <CardDescription className="text-zinc-400">
@@ -107,7 +109,7 @@ export default function ContactPage() {
                         value={formData.name}
                         onChange={handleChange}
                         placeholder="Your name"
-                        className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
+                        className="bg-zinc-800/60 border-zinc-700/40 text-white focus:border-orange-500/50 focus:shadow-[0_0_0_1px_rgba(255,107,0,0.2),0_0_15px_rgba(255,107,0,0.08)] transition-all duration-300"
                       />
                     </div>
                     <div className="space-y-2">
@@ -118,7 +120,7 @@ export default function ContactPage() {
                         value={formData.email}
                         onChange={handleChange}
                         placeholder="Your email"
-                        className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
+                        className="bg-zinc-800/60 border-zinc-700/40 text-white focus:border-orange-500/50 focus:shadow-[0_0_0_1px_rgba(255,107,0,0.2),0_0_15px_rgba(255,107,0,0.08)] transition-all duration-300"
                       />
                     </div>
                   </motion.div>
@@ -136,7 +138,7 @@ export default function ContactPage() {
                       value={formData.subject}
                       onChange={handleChange}
                       placeholder="Project inquiry"
-                      className="bg-zinc-800/50 border-zinc-700/50 text-white focus:border-orange-500/50 transition-colors"
+                      className="bg-zinc-800/60 border-zinc-700/40 text-white focus:border-orange-500/50 focus:shadow-[0_0_0_1px_rgba(255,107,0,0.2),0_0_15px_rgba(255,107,0,0.08)] transition-all duration-300"
                     />
                   </motion.div>
 
@@ -153,7 +155,7 @@ export default function ContactPage() {
                       value={formData.message}
                       onChange={handleChange}
                       placeholder="Your message"
-                      className="bg-zinc-800/50 border-zinc-700/50 text-white min-h-[150px] focus:border-orange-500/50 transition-colors"
+                      className="bg-zinc-800/60 border-zinc-700/40 text-white min-h-[150px] focus:border-orange-500/50 focus:shadow-[0_0_0_1px_rgba(255,107,0,0.2),0_0_15px_rgba(255,107,0,0.08)] transition-all duration-300"
                     />
                   </motion.div>
 
@@ -166,9 +168,13 @@ export default function ContactPage() {
                     <motion.button
                       type="submit"
                       disabled={isSubmitting}
-                      whileHover={{ scale: 1.02, boxShadow: '0 0 30px rgba(255,107,0,0.4)' }}
+                      whileHover={{ scale: 1.015, y: -1 }}
                       whileTap={{ scale: 0.98 }}
-                      className="w-full py-3 px-6 rounded-md bg-gradient-to-r from-orange-600 to-orange-500 text-white font-medium flex items-center justify-center gap-2 disabled:opacity-60 transition-all duration-300 hover:from-orange-500 hover:to-orange-600"
+                      className="w-full py-3.5 px-6 rounded-lg text-white font-semibold tracking-wide flex items-center justify-center gap-2.5 disabled:opacity-60 transition-all duration-300"
+                      style={{
+                        background: 'linear-gradient(135deg, #ff6b00, #e55d00)',
+                        boxShadow: '0 4px 15px rgba(255,107,0,0.25), inset 0 1px 0 rgba(255,255,255,0.15), 0 0 0 1px rgba(255,107,0,0.3)',
+                      }}
                     >
                       {isSubmitting ? (
                         <>
@@ -190,7 +196,7 @@ export default function ContactPage() {
                 </form>
               </CardContent>
             </Card>
-          </SpotlightCard>
+          </Card3D>
         </motion.div>
       </div>
     </motion.div>

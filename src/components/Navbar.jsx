@@ -44,23 +44,30 @@ export default function Navbar() {
   return (
     <nav>
       <motion.div
-        className={`fixed top-0 z-40 w-full border-b transition-all duration-300 ${
+        className={`fixed top-0 z-40 w-full transition-all duration-500 ${
           scrolled
-            ? 'border-white/10 bg-gray-900/70 backdrop-blur-xl shadow-lg shadow-black/20'
-            : 'border-gray-200/20 bg-gray-800/30 backdrop-blur-md'
+            ? 'bg-[#0a0a0a]/80 backdrop-blur-2xl shadow-[0_1px_0_rgba(255,107,0,0.08),0_4px_30px_rgba(0,0,0,0.4)]'
+            : 'bg-transparent backdrop-blur-md'
         }`}
         initial={{ y: -80 }}
         animate={{ y: 0 }}
-        transition={{ duration: 0.5, ease: 'easeOut' }}
+        transition={{ duration: 0.6, ease: [0.25, 0.1, 0.25, 1] }}
       >
-        <div className="flex items-center justify-between px-10 py-3 lg:px-6">
+        {/* Bottom border line */}
+        <div className={`absolute bottom-0 left-0 right-0 h-px transition-opacity duration-500 ${scrolled ? 'opacity-100' : 'opacity-0'}`}
+          style={{ background: 'linear-gradient(90deg, transparent, rgba(255,107,0,0.15), transparent)' }}
+        />
+
+        <div className="flex items-center justify-between px-10 py-3.5 lg:px-6">
           {/* Logo */}
           <div className="flex items-center">
-            <Link to="/" className="flex items-center">
-              <img
+            <Link to="/" className="flex items-center group">
+              <motion.img
                 src="/logo.png"
                 alt="Logo"
-                className="h-8 w-8 object-contain"
+                className="h-8 w-8 object-contain transition-all duration-300 group-hover:drop-shadow-[0_0_8px_rgba(255,107,0,0.4)]"
+                whileHover={{ scale: 1.1, rotate: 5 }}
+                whileTap={{ scale: 0.95 }}
               />
             </Link>
           </div>
@@ -71,14 +78,20 @@ export default function Navbar() {
               <Link
                 key={to}
                 to={to}
-                className="relative text-sm text-gray-400 hover:text-white transition-colors py-1"
+                className={`relative text-sm font-medium tracking-wide transition-colors py-1.5 px-1 ${
+                  location.pathname === to ? 'text-white' : 'text-zinc-500 hover:text-zinc-200'
+                }`}
               >
                 {label}
                 {location.pathname === to && (
                   <motion.div
                     layoutId="activeNav"
-                    className="absolute -bottom-1 left-0 right-0 h-0.5 bg-orange-500 rounded-full"
-                    transition={{ type: 'spring', stiffness: 300, damping: 30 }}
+                    className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full"
+                    style={{
+                      background: 'linear-gradient(90deg, #ff6b00, #ff8533)',
+                      boxShadow: '0 0 8px rgba(255,107,0,0.4)',
+                    }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 30 }}
                   />
                 )}
               </Link>
@@ -90,29 +103,46 @@ export default function Navbar() {
             href="/Resume.pdf"
             download="Resume.pdf"
             onClick={handleResumeClick}
-            whileHover={{ scale: 1.05 }}
+            whileHover={{ scale: 1.05, boxShadow: '0 0 20px rgba(255,107,0,0.3)' }}
             whileTap={{ scale: 0.95 }}
-            className="hidden lg:flex px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors items-center"
+            className="hidden lg:flex px-5 py-2 text-sm font-medium text-white rounded-lg items-center gap-2 transition-all duration-300"
+            style={{
+              background: 'linear-gradient(135deg, #ff6b00, #e55d00)',
+              border: '1px solid rgba(255,140,51,0.3)',
+            }}
           >
-            {isResumeClicked ? (
-              <Check className="h-4 w-4 mr-2" />
-            ) : (
-              <Download className="h-4 w-4 mr-2" />
-            )}
+            <AnimatePresence mode="wait">
+              {isResumeClicked ? (
+                <motion.span key="check" initial={{ scale: 0, rotate: -90 }} animate={{ scale: 1, rotate: 0 }} exit={{ scale: 0 }}>
+                  <Check className="h-4 w-4" />
+                </motion.span>
+              ) : (
+                <motion.span key="download" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
+                  <Download className="h-4 w-4" />
+                </motion.span>
+              )}
+            </AnimatePresence>
             Resume
           </motion.a>
 
           {/* Mobile Menu Button */}
-          <button
-            className="lg:hidden"
+          <motion.button
+            className="lg:hidden relative w-10 h-10 flex items-center justify-center rounded-lg hover:bg-white/5 transition-colors"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            whileTap={{ scale: 0.9 }}
           >
-            {mobileMenuOpen ? (
-              <XIcon className="h-6 w-6 text-gray-200" />
-            ) : (
-              <MenuIcon className="h-6 w-6 text-gray-200" />
-            )}
-          </button>
+            <AnimatePresence mode="wait">
+              {mobileMenuOpen ? (
+                <motion.span key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <XIcon className="h-5 w-5 text-zinc-200" />
+                </motion.span>
+              ) : (
+                <motion.span key="menu" initial={{ rotate: 90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: -90, opacity: 0 }} transition={{ duration: 0.15 }}>
+                  <MenuIcon className="h-5 w-5 text-zinc-200" />
+                </motion.span>
+              )}
+            </AnimatePresence>
+          </motion.button>
         </div>
 
         {/* Mobile Navigation */}
@@ -120,26 +150,26 @@ export default function Navbar() {
           {mobileMenuOpen && (
             <motion.div
               ref={menuRef}
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.25, ease: 'easeInOut' }}
-              className="lg:hidden absolute top-full left-0 w-full bg-gray-900/95 backdrop-blur-xl overflow-hidden"
+              initial={{ opacity: 0, height: 0, filter: 'blur(10px)' }}
+              animate={{ opacity: 1, height: 'auto', filter: 'blur(0px)' }}
+              exit={{ opacity: 0, height: 0, filter: 'blur(10px)' }}
+              transition={{ duration: 0.3, ease: [0.25, 0.1, 0.25, 1] }}
+              className="lg:hidden absolute top-full left-0 w-full bg-[#0a0a0a]/95 backdrop-blur-2xl overflow-hidden border-t border-white/5"
             >
               <div className="p-4 space-y-1">
                 {navLinks.map(({ to, label }, i) => (
                   <motion.div
                     key={to}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: i * 0.05 }}
+                    initial={{ opacity: 0, x: -20, filter: 'blur(4px)' }}
+                    animate={{ opacity: 1, x: 0, filter: 'blur(0px)' }}
+                    transition={{ delay: i * 0.06, duration: 0.3 }}
                   >
                     <Link
                       to={to}
-                      className={`text-sm font-medium transition-colors block py-2 px-2 rounded ${
+                      className={`text-sm font-medium transition-all block py-2.5 px-3 rounded-lg ${
                         location.pathname === to
-                          ? 'text-orange-400'
-                          : 'text-gray-200 hover:text-white'
+                          ? 'text-orange-400 bg-orange-500/10'
+                          : 'text-zinc-300 hover:text-white hover:bg-white/5'
                       }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
@@ -151,7 +181,8 @@ export default function Navbar() {
                 <motion.div
                   initial={{ opacity: 0, x: -20 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.15 }}
+                  transition={{ delay: 0.18, duration: 0.3 }}
+                  className="pt-2"
                 >
                   <a
                     href="/Resume.pdf"
@@ -160,12 +191,13 @@ export default function Navbar() {
                       handleResumeClick()
                       setMobileMenuOpen(false)
                     }}
-                    className="px-4 py-2 text-sm text-white bg-orange-500 rounded hover:bg-orange-600 transition-colors flex items-center mt-2 w-fit"
+                    className="px-4 py-2.5 text-sm font-medium text-white rounded-lg transition-colors flex items-center gap-2 w-fit"
+                    style={{ background: 'linear-gradient(135deg, #ff6b00, #e55d00)' }}
                   >
                     {isResumeClicked ? (
-                      <Check className="h-4 w-4 mr-2" />
+                      <Check className="h-4 w-4" />
                     ) : (
-                      <Download className="h-4 w-4 mr-2" />
+                      <Download className="h-4 w-4" />
                     )}
                     Resume
                   </a>

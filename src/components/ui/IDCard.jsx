@@ -130,9 +130,14 @@ export default function IDCard() {
         }}
         className="mt-0.5"
       >
-        <div className="relative bg-white rounded-2xl w-[250px] md:w-[300px] shadow-[0_30px_60px_rgba(0,0,0,0.5),0_0_20px_rgba(255,107,0,0.08)] overflow-hidden">
+        <div
+          className="relative bg-white rounded-2xl w-[250px] md:w-[300px] overflow-hidden"
+          style={{
+            boxShadow: '0 30px 60px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.1), 0 0 30px rgba(255,107,0,0.08), inset 0 1px 0 rgba(255,255,255,0.2)',
+          }}
+        >
           {/* Top accent gradient */}
-          <div className="h-1.5 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-600" />
+          <div className="h-1.5 bg-gradient-to-r from-orange-600 via-orange-400 to-orange-600 shadow-[0_2px_10px_rgba(255,107,0,0.3)]" />
 
           {/* Card hole for clip */}
           <div className="flex justify-center pt-2.5 pb-2">
@@ -155,7 +160,7 @@ export default function IDCard() {
             <h2 className="text-xl md:text-2xl font-bold text-gray-900 tracking-tight">
               MAHAK KANKARIA
             </h2>
-            <p className="text-orange-500 font-semibold text-sm mt-1 tracking-wide">
+            <p className="font-semibold text-sm mt-1 tracking-widest uppercase bg-gradient-to-r from-orange-600 to-orange-400 bg-clip-text text-transparent">
               Full Stack Developer
             </p>
           </div>
@@ -173,9 +178,9 @@ export default function IDCard() {
                 href={href}
                 target="_blank"
                 rel="noopener noreferrer"
-                whileHover={{ scale: 1.25, y: -2, color: '#ff6b00' }}
-                whileTap={{ scale: 0.9 }}
-                className="text-zinc-400 transition-colors"
+                whileHover={{ scale: 1.3, y: -3, color: '#ff6b00' }}
+                whileTap={{ scale: 0.85 }}
+                className="text-zinc-400 transition-all duration-200 hover:drop-shadow-[0_0_6px_rgba(255,107,0,0.4)]"
               >
                 <Icon size={20} />
               </motion.a>

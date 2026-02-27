@@ -1,6 +1,16 @@
 const projects = [
-    {
+  {
       id: 1,
+      title: "GitGud",
+      description: "Full Stack Application",
+      image: "/project-images/GitGud.png",
+      tech: "GitGud is a gamified platform - the 'Tinder' for Open Source. It aggregates beginner-friendly GitHub issues with an AI-powered workspace to guide developers through fixes.",
+      techTags: ["Next.js", "TypeScript", "Tailwind CSS", "Clerk", "Gemini AI"],
+      codeLink: "https://github.com/mahak0711/GitGud",
+      demoLink: "https://git-gud-ai.vercel.app",
+    },
+    {
+      id: 2,
       title: "WonderWise",
       description: "Full Stack Application",
       image: "/project-images/WonderWise.png",
@@ -9,16 +19,7 @@ const projects = [
       codeLink: "https://github.com/mahak0711/wonderwise-ai_planner",
       demoLink: "https://wonder-wise-6ed9a.firebaseapp.com/"
     },
-    {
-      id: 2,
-      title: "Check Point",
-      description: "Frontend Application",
-      image: "/project-images/checkpoint.png",
-      tech:"Checkpoint is a simple To-Do application built using HTML, CSS, and JavaScript for efficient task management.",
-      techTags: ["HTML", "CSS", "JavaScript"],
-      codeLink: "https://github.com/mahak0711/CheckPoint",
-      demoLink: "https://check-point-six.vercel.app/",
-    },
+    
     {
       id:3,
       title:"NextPrompt",
@@ -39,6 +40,7 @@ const projects = [
       codeLink: "https://github.com/mahak0711/piece-ai-hands-on",
       demoLink: "https://mahak0711.github.io/piece-ai-hands-on/",
     },
+    
 
   ];
   export default projects;

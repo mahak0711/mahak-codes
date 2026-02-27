@@ -4,8 +4,11 @@ import SkillsHead from "./SkillsHead";
 import IconCloud from "./ui/icon-cloud";
 import { ScrollDownButton } from "./ui/ScrollDownButton";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import FloatingOrbs from "./ui/FloatingOrbs";
 import TextShimmer from "./ui/TextShimmer";
-import StaggerText from "./ui/StaggerText";
+import Text3D from "./ui/Text3D";
+
+import RotatingCube from "./ui/RotatingCube";
 
 function TimelineItem({ children, delay = 0 }) {
   return (
@@ -37,6 +40,7 @@ export default function AboutPage() {
         className="min-h-screen bg-[#1c1c1c] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden"
       >
         <AnimatedBackground variant="cosmic" />
+        <FloatingOrbs />
 
         <div className="max-w-full mx-auto relative">
           <div>
@@ -47,7 +51,7 @@ export default function AboutPage() {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl font-bold mb-8 mt-4"
             >
-              <StaggerText text="About Me" staggerDelay={0.05} />
+              <Text3D text="About Me" className="text-4xl md:text-5xl font-bold" />
             </motion.h1>
 
             <motion.div
@@ -57,9 +61,14 @@ export default function AboutPage() {
               transition={{ duration: 0.6, delay: 0.2 }}
               className="prose prose-invert"
             >
-              <p className="text-lg text-zinc-300 leading-relaxed">
-                I am a full-stack developer with expertise in building dynamic web applications using technologies like React, Node.js, and various database solutions. I combine strong front-end design skills with back-end development knowledge to create responsive, user-centric digital experiences. Passionate about problem-solving and continuous learning, I strive to deliver efficient and impactful solutions.
-              </p>
+              <div className="flex flex-col lg:flex-row items-center gap-8 mb-6">
+                <p className="text-lg text-zinc-300 leading-relaxed flex-1">
+                  I am a full-stack developer with expertise in building dynamic web applications using technologies like React, Node.js, and various database solutions. I combine strong front-end design skills with back-end development knowledge to create responsive, user-centric digital experiences. Passionate about problem-solving and continuous learning, I strive to deliver efficient and impactful solutions.
+                </p>
+                <div className="flex-shrink-0 hidden lg:block">
+                  <RotatingCube size={120} />
+                </div>
+              </div>
 
               {/* Gradient divider */}
               <motion.div
@@ -120,6 +129,7 @@ export default function AboutPage() {
 
       <ScrollDownButton />
       <SkillsHead />
+
       <IconCloud iconSlugs={["javascript", "typescript", "react", "nodejs", "html5", "css3", "git",
         "github", "figma", "bootstrap", "tailwindcss", "mongodb", "firebase",
         "express", "vite", "vercel", "linux", "java", "python", "nextdotjs", "postgresql", "prisma"]} />

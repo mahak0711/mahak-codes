@@ -9,27 +9,61 @@
 }
 
 html {
-    scroll-behavior: smooth;
-  }
+  scroll-behavior: smooth;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(255, 107, 0, 0.3);
+  color: #fff;
+}
+
+/* Film grain overlay for texture */
+.grain::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.03;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}
 
 /* Custom scrollbar styling */
 .scrollbar::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 .scrollbar::-webkit-scrollbar-track {
-  background: #1c1c1c;
-  border-radius: 10px;
+  background: transparent;
 }
 
 .scrollbar::-webkit-scrollbar-thumb {
-  background: #ff6b00;
+  background: linear-gradient(180deg, #ff6b00, #ff4500);
   border-radius: 10px;
 }
 
 .scrollbar::-webkit-scrollbar-thumb:hover {
-  background: #ff4500;
+  background: linear-gradient(180deg, #ff8533, #ff6b00);
+}
+
+/* Global scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ff6b0050;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b0080;
 }
 
 /* Animated conic gradient border */
@@ -47,4 +81,24 @@ html {
 @keyframes border-rotate {
   0% { --border-angle: 0deg; }
   100% { --border-angle: 360deg; }
+}
+
+/* Crispy focus rings */
+*:focus-visible {
+  outline: 2px solid #ff6b00;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Smooth image rendering */
+img {
+  image-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Better text rendering */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }

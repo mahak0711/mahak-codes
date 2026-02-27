@@ -6,9 +6,11 @@ import { Tooltip as ReactTooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 import AnimatedBackground from './ui/AnimatedBackground';
 import FloatingShapes from './ui/FloatingShapes';
+import FloatingOrbs from './ui/FloatingOrbs';
 import Particles from './ui/Particles';
-import StaggerText from './ui/StaggerText';
+
 import TextShimmer from './ui/TextShimmer';
+import Text3D from './ui/Text3D';
 import IDCard from './ui/IDCard';
 
 export function Hero() {
@@ -17,6 +19,7 @@ export function Hero() {
       <AnimatedBackground variant="cosmic" />
       <Particles count={40} />
       <FloatingShapes />
+      <FloatingOrbs />
       <Meteors number={15} />
 
       {/* 3D Animated ID Card - lanyard extends to top of viewport */}
@@ -32,7 +35,7 @@ export function Hero() {
         className="max-w-xl w-full text-center md:text-left relative z-10"
       >
         <h1 className="text-4xl md:text-6xl font-bold mb-4">
-          <StaggerText text="FULL STACK" delay={1.2} staggerDelay={0.04} />
+          <Text3D text="FULL STACK" className="text-4xl md:text-6xl font-bold" delay={1.2} />
           <br />
           <TextShimmer className="text-4xl md:text-6xl font-bold">DEVELOPER</TextShimmer>
         </h1>
@@ -54,7 +57,7 @@ export function Hero() {
           className="overflow-auto scrollbar"
         >
           <GitHubCalendar
-            year="2025"
+            year="2026"
             blockRadius="4"
             username="mahak0711"
             transformData={(data) =>

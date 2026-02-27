@@ -12,14 +12,17 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import projects from "@/projects";
-import SpotlightCard from "./ui/SpotlightCard";
+import Card3D from "./ui/Card3D";
 import AnimatedBackground from "./ui/AnimatedBackground";
+import FloatingOrbs from "./ui/FloatingOrbs";
+import Text3D from "./ui/Text3D";
 import TextShimmer from "./ui/TextShimmer";
 
 function ProjectsPage() {
   return (
     <div className="min-h-screen bg-[#151312] text-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       <AnimatedBackground />
+      <FloatingOrbs />
 
       <div className="max-w-7xl mx-auto relative">
         <motion.div
@@ -29,7 +32,7 @@ function ProjectsPage() {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-4xl md:text-5xl font-bold mb-2">
-            <TextShimmer className="text-4xl md:text-5xl font-bold">Projects</TextShimmer>
+            <Text3D text="Projects" className="text-4xl md:text-5xl font-bold" />
           </h1>
           <span className="block h-1 w-20 mt-2 rounded-full bg-gradient-to-r from-orange-500 to-orange-600/0" />
         </motion.div>
@@ -56,8 +59,8 @@ function ProjectsPage() {
                 ease: [0.25, 0.46, 0.45, 0.94],
               }}
             >
-              <SpotlightCard>
-                <Card className="bg-zinc-900/80 backdrop-blur-sm border-zinc-800 transition-all duration-500 hover:shadow-[0_0_40px_rgba(255,107,0,0.12)] hover:border-zinc-700">
+              <Card3D intensity={10}>
+                <Card className="bg-zinc-900/80 backdrop-blur-xl border-zinc-800/50 transition-all duration-500 hover:border-orange-500/15 shadow-[0_0_0_1px_rgba(255,255,255,0.02)]">
                   <CardHeader>
                     <CardTitle className="text-white">{project.title}</CardTitle>
                     <CardDescription className="text-zinc-400">
@@ -79,7 +82,7 @@ function ProjectsPage() {
                         {project.techTags.map((tag) => (
                           <span
                             key={tag}
-                            className="px-2.5 py-0.5 text-xs rounded-full bg-orange-500/10 text-orange-400 border border-orange-500/20 hover:bg-orange-500/20 transition-colors cursor-default"
+                            className="px-2.5 py-0.5 text-xs font-medium rounded-full bg-orange-500/8 text-orange-400/90 border border-orange-500/15 hover:bg-orange-500/15 hover:border-orange-500/25 hover:shadow-[0_0_10px_rgba(255,107,0,0.08)] transition-all duration-300 cursor-default"
                           >
                             {tag}
                           </span>
@@ -111,7 +114,7 @@ function ProjectsPage() {
                     </div>
                   </CardContent>
                 </Card>
-              </SpotlightCard>
+              </Card3D>
             </motion.div>
           ))}
         </div>
