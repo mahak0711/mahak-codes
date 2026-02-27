@@ -6,7 +6,6 @@ import { Button } from './ui/Button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import emailjs from 'emailjs-com';
 import { useState } from 'react';
 import Card3D from './ui/Card3D';
 import AnimatedBackground from './ui/AnimatedBackground';
@@ -31,29 +30,37 @@ export default function ContactPage() {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const serviceID = 'service_zunkyr8';
-    const templateID = 'template_7atjr0m';
-    const userID = 'YyDMEh-4JOjtPtXaw';
-
-    emailjs
-      .send(serviceID, templateID, formData, userID)
-      .then(
-        (response) => {
-          console.log('Message sent successfully', response);
-          alert('Message sent successfully!');
-        },
-        (error) => {
-          console.log('Error sending message', error);
-          alert('Failed to send message, please try again later.');
-        }
-      )
-      .finally(() => {
-        setIsSubmitting(false);
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          access_key: import.meta.env.VITE_WEB3FORMS_ACCESS_KEY,
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+        }),
       });
+
+      const result = await response.json();
+
+      if (result.success) {
+        alert('Message sent successfully!');
+        setFormData({ name: '', email: '', subject: '', message: '' });
+      } else {
+        alert('Failed to send message, please try again later.');
+      }
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message, please try again later.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
