@@ -185,8 +185,8 @@ export default function Navbar() {
                   className="pt-2"
                 >
                   <a
-                    href="/Resume.pdf"
-                    download="Resume.pdf"
+                    href="/Resume_Mahak.pdf"
+                    download="Resume_Mahak.pdf"
                     onClick={() => {
                       handleResumeClick()
                       setMobileMenuOpen(false)
